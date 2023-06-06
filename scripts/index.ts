@@ -15,7 +15,7 @@ export const GAME_ADMIN = ethers.utils.keccak256(
 
 const main = async () => {
   [deployer, admin, signer1, signer2] = await ethers.getSigners();
-  const { sicboAddress } = getAllAddresses(network.config.chainId);
+  const { faucetAddress } = getAllAddresses(network.config.chainId);
   const { faucetToken, lockStaking } = await getContracts(
     network.config.chainId?.toString()
   );

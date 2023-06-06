@@ -11,12 +11,12 @@ let [deployer, admin, user1, user2]: SignerWithAddress[] = [];
 
 const deployStaking = async () => {
   const { faucetAddress } = getAllAddresses(network.config.chainId);
-  const Fac = await ethers.getContractFactory("Sicbo");
+  const Fac = await ethers.getContractFactory("LockStaking");
 
   const staking = await upgrades.deployProxy(Fac, [faucetAddress]);
 
   await staking.deployed();
-  setAddress("sicboAddress", staking.address, network.config.chainId);
+  setAddress("stakingAddress", staking.address, network.config.chainId);
 };
 
 const deployFaucet = async () => {

@@ -5,19 +5,18 @@ import { getAllAddresses } from "./address/handleAddress";
 let [deployer, admin, user1, user2]: Signer[] = [];
 
 async function main() {
-  const { sicboAddress, sicboNFTAddress } = getAllAddresses(
+  const { faucetAddress, stakingAddress } = getAllAddresses(
     network.config.chainId?.toString()
   );
 
   [deployer, admin, user1, user2] = await ethers.getSigners();
 
-  const SicboFac = await ethers.getContractFactory("Sicbo", deployer);
+  const LockStakingFac = await ethers.getContractFactory(
+    "LockStaking",
+    deployer
+  );
 
-  await upgrades.upgradeProxy(sicboAddress, SicboFac);
-
-  // const SicboNftFac = await ethers.getContractFactory("SicboNFT", deployer);
-
-  // await upgrades.upgradeProxy(sicboNFTAddress, SicboNftFac);
+  await upgrades.upgradeProxy(stakingAddress, LockStakingFac);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -13,7 +13,7 @@ export const getContracts = async (chainId: any) => {
   )) as FaucetToken;
 
   lockStaking = (await ethers.getContractAt(
-    "SicboNFT",
+    "LockStaking",
     stakingAddress
   )) as LockStaking;
 

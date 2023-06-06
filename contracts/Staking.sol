@@ -152,8 +152,6 @@ contract LockStaking is
     }
   }
 
-  // function updateApyOnAmountArr()
-
   function getApy(ApyOnAmount[] memory apyOnAmountArr, uint256 userAmount)
     public
     pure

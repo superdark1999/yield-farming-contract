@@ -36,8 +36,7 @@
   "scripts": {
     "execute:deploy:testnet": "npx hardhat run scripts/deploy.ts --network bsc_testnet",
     "execute:run:testnet": "npx hardhat run scripts/index.ts --network bsc_testnet",
-    "execute:upgrade:testnet": "npx hardhat run scripts/upgrade.ts --network bsc_testnet",
-    "execute:setup:testnet": "npx hardhat run scripts/setup/sicbo.ts --network bsc_testnet"
+    "execute:upgrade:testnet": "npx hardhat run scripts/upgrade.ts --network bsc_testnet"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.4.1",
