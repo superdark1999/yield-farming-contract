@@ -13,18 +13,14 @@ export const GAME_ADMIN = ethers.utils.keccak256(
   ethers.utils.toUtf8Bytes("GAME_ADMIN")
 );
 
-// setSicboContract ( nft )
-// addAdmin ( nft )
-// setPrices ( sicbo )
-
 const main = async () => {
   [deployer, admin, signer1, signer2] = await ethers.getSigners();
   const { sicboAddress } = getAllAddresses(network.config.chainId);
-  const { sicbo, sicboNFT, vrfV2Consumer } = await getContracts(
+  const { faucetToken, lockStaking } = await getContracts(
     network.config.chainId?.toString()
   );
 
-  await (await sicbo.endRound(25)).wait();
+  // await (await sicbo.endRound(25)).wait();
 };
 
 main().catch((error) => {

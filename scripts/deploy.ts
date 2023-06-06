@@ -9,25 +9,29 @@ import {
 
 let [deployer, admin, user1, user2]: SignerWithAddress[] = [];
 
-const deploySicbo = async () => {
-  const { sicboNFTAddress, vrfV2ConsumerAddress } = getAllAddresses(
-    network.config.chainId
-  );
+const deployStaking = async () => {
+  const { faucetAddress } = getAllAddresses(network.config.chainId);
   const Fac = await ethers.getContractFactory("Sicbo");
 
-  const sicbo = await upgrades.deployProxy(Fac, [
-    sicboNFTAddress,
-    vrfV2ConsumerAddress,
-  ]);
+  const staking = await upgrades.deployProxy(Fac, [faucetAddress]);
 
-  await sicbo.deployed();
-  setAddress("sicboAddress", sicbo.address, network.config.chainId);
+  await staking.deployed();
+  setAddress("sicboAddress", staking.address, network.config.chainId);
+};
+
+const deployFaucet = async () => {
+  const Faucet = await ethers.getContractFactory("FaucetToken");
+  const faucet = await Faucet.deploy("faucet token", "faucet");
+  await faucet.deployed();
+
+  setAddress("faucetAddress", (faucet as any).address, network.config.chainId);
 };
 
 async function main() {
   [deployer] = await ethers.getSigners();
 
-  await deploySicbo();
+  await deployFaucet();
+  // await deployStaking();
 }
 
 // We recommend this pattern to be able to use async/await everywhere

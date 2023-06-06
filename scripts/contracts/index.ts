@@ -1,23 +1,21 @@
 import { ethers } from "hardhat";
-import { Sicbo, SicboNFT } from "../../typechain";
+import { FaucetToken, LockStaking } from "../../typechain";
 import { getAllAddresses } from "../address/handleAddress";
 
 export const getContracts = async (chainId: any) => {
-  const { sicboAddress, sicboNFTAddress, vrfV2ConsumerAddress } =
-    getAllAddresses(chainId);
+  const { faucetAddress, stakingAddress } = getAllAddresses(chainId);
 
-  let sicbo, sicboNFT, vrfV2Consumer;
+  let faucetToken, lockStaking;
 
-  sicbo = (await ethers.getContractAt("Sicbo", sicboAddress)) as Sicbo;
+  faucetToken = (await ethers.getContractAt(
+    "FaucetToken",
+    faucetAddress
+  )) as FaucetToken;
 
-  sicboNFT = (await ethers.getContractAt(
+  lockStaking = (await ethers.getContractAt(
     "SicboNFT",
-    sicboNFTAddress
-  )) as SicboNFT;
-  vrfV2Consumer = await ethers.getContractAt(
-    "VRFv2Consumer",
-    vrfV2ConsumerAddress
-  );
+    stakingAddress
+  )) as LockStaking;
 
-  return { sicbo, sicboNFT, vrfV2Consumer };
+  return { faucetToken, lockStaking };
 };
