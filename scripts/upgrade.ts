@@ -11,10 +11,7 @@ async function main() {
 
   [deployer, admin, user1, user2] = await ethers.getSigners();
 
-  const LockStakingFac = await ethers.getContractFactory(
-    "LockStaking",
-    deployer
-  );
+  const LockStakingFac = await ethers.getContractFactory("LockStaking", deployer);
 
   await upgrades.upgradeProxy(stakingAddress, LockStakingFac);
 }

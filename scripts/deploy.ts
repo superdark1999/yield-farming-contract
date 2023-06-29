@@ -1,6 +1,9 @@
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { Signer } from "ethers";
-import { ethers, upgrades, network } from "hardhat";
+import { 
+  ethers, 
+  upgrades, 
+  network } from "hardhat";
 import {
   setAddress,
   getAddress,
@@ -11,11 +14,13 @@ let [deployer, admin, user1, user2]: SignerWithAddress[] = [];
 
 const deployStaking = async () => {
   const { faucetAddress } = getAllAddresses(network.config.chainId);
+
   const Fac = await ethers.getContractFactory("LockStaking");
 
   const staking = await upgrades.deployProxy(Fac, [faucetAddress]);
 
   await staking.deployed();
+  
   setAddress("stakingAddress", staking.address, network.config.chainId);
 };
 
