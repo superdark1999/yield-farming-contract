@@ -8,7 +8,8 @@ export const getAllAddresses = (chainId?: any) => {
     fs.readFileSync(pathToAddress, "utf-8")
   );
 
-  return addressFileContent[chainId];
+  const addressList = addressFileContent[chainId];
+  return addressList;
 };
 
 export const getAddress = (contractName: string, chainId?: any) => {
@@ -16,7 +17,8 @@ export const getAddress = (contractName: string, chainId?: any) => {
     fs.readFileSync(pathToAddress, "utf-8")
   );
 
-  return addressFileContent[chainId][contractName];
+  const address = addressFileContent[chainId][contractName];
+  return address;
 };
 
 export const setAddress = (
